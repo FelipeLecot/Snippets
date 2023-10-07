@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
 const client = new MongoClient("MONGO_URI", {maxIdleTimeMS: 2000});
+const database = 'REPLACE_DB';
 
 export const aggregate = async (stages = [], collection, options = {}) => {
     try {
@@ -11,14 +12,14 @@ export const aggregate = async (stages = [], collection, options = {}) => {
         ]
 
         if (options.limit != undefined) {
-            allOps.push({'$limit': parseInt(options.limit)});
+            allOps.push({'$limit': parseInt(options.limit) || defaultLimit});
         }
 
         if (options.sort != undefined) {
             allOps.push({'$sort': options.sort});
         }
 
-        let db = client.db("REPLACE_DB");
+        let db = client.db(database);
         let result = db.collection(collection);
         
         return result
@@ -36,12 +37,12 @@ export const aggregate = async (stages = [], collection, options = {}) => {
 export const find = async (filter = {}, collection, options = {limit: 0, projection: {}, sort: {}}) => {
     await client.connect();
 
-    let db = client.db("REPLACE_DB");
+    let db = client.db(database);
     let result = db.collection(collection);
     try {
         return result
             .find(filter, {projection: options.projection})
-            .limit(parseInt(options.limit))
+            .limit(options.limit)
             .sort(options.sort)
             .toArray();
     }
@@ -54,7 +55,7 @@ export const find = async (filter = {}, collection, options = {limit: 0, project
 export const insert = async (data, collection) => {
     await client.connect();
 
-    let db = client.db("REPLACE_DB");
+    let db = client.db(database);
     let result = db.collection(collection);
     try {
         result.insertOne(data);
@@ -69,7 +70,7 @@ export const insert = async (data, collection) => {
 export const update = async (filter, update, collection) => {
     await client.connect();
 
-    let db = client.db("REPLACE_DB");
+    let db = client.db(database);
     let result = db.collection(collection);
     try {
         result.updateMany(filter, update);
