@@ -1,41 +1,16 @@
 <amp-analytics type="googleanalytics" config="https://amp.analytics-debugger.com/ga4.json" data-credentials="include">
   <script type="application/json">
-      // Example with page_view as the event
-      {
-          "vars": {
-              "GA4_MEASUREMENT_ID": "G-123123",
-              "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
-              "GOOGLE_CONSENT_ENABLED": false,
-              "documentLocation": "SOURCE_URL",
-              "WEBVITALS_TRACKING": true,
-              "PERFORMANCE_TIMING_TRACKING": true,
-              "DEFAULT_PAGEVIEW_ENABLED": false,
-              "SEND_DOUBLECLICK_BEACON": false,
-              "ENABLE_REGIONAL_DATA_COLLECTION": true
-          },
-          "triggers": {
-              "custom_page_view": {
-                  "enabled": true,
-                  "on": "visible",
-                  "request": "ga4Pageview",
-                  "vars": {
-                      "ga4_event_name": "page_view"
-                  },
-                  "extraUrlParams": {
-                      "event__str_custom_dimension": "value"
-                  }
-              }
-          },
-          "requestOrigin": "https://${GA4_ENDPOINT_HOSTNAME}",
-          "requests": {
-              "ga4SharedPayload": "v=2&tid=${GA4_MEASUREMENT_ID}&_p=${pageViewId}&ul=${browserLanguage}&sr=${screenWidth}x${screenHeight}&_s=${requestCount}&dl=${documentLocation}&dr=${externalReferrer}&dt=${title}&${ga4IsFirstVisit}=1&${ga4IsSessionStart}=1",
-              "ga4Pageview": {
-                  "baseUrl": "/g/collect?${ga4SharedPayload}&en=page_view"
-              },
-              "ga4Event": {
-                  "baseUrl": "/g/collect?${ga4SharedPayload}&en=${ga4_event_name}"
-              }
-          }
-      }
+    {
+        "vars": {
+            "gtag_id": "G-06VYK9DSKC",
+            "config": {
+                "G-06VYK9DSKC": {
+                    "groups": "default",
+                    "customDimension1": "value1",
+                    "customDimension2": "value2" //...
+                }
+            }
+        }
+    }    
   </script>
 </amp-analytics>
