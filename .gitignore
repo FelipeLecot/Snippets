@@ -1,1 +1,2 @@
 /AWS-CF/node_modules/*
+/helpers/countObjectsOnBigJSONFile/node_modules
