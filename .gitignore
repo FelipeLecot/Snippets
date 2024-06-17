@@ -1,3 +1,5 @@
 /AWS-CF/node_modules/*
 /helpers/countObjectsOnBigJSONFile/node_modules
 /Twitter/image_upload/node_modules
+Twitter/image_upload/.env
+/Twitter/image_upload
